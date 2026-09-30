@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>User Management | NexaPulse Analytics</title>
+
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="/css/pages.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">N</div>
+
+            <div>
+                <h2>NexaPulse</h2>
+                <span>Analytics</span>
+            </div>
+        </div>
+
+        <nav>
+
+            <a href="/">
+                <span>▦</span>
+                Dashboard
+            </a>
+
+            <a href="/sales">
+                <span>◫</span>
+                Sales
+            </a>
+
+            <a href="/customers">
+                <span>◉</span>
+                Customers
+            </a>
+
+            <a href="/products">
+                <span>▤</span>
+                Products
+            </a>
+
+            <a href="/regions">
+                <span>◌</span>
+                Regions
+            </a>
+
+            <% if (user && user.role === "admin") { %>
+
+                <a href="/users">
+                    <span>♙</span>
+                    Users
+                </a>
+
+            <% } %>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <div class="system-status">
+                <div class="status-dot"></div>
+
+                <div>
+                    <strong>System Online</strong>
+                    <small>NexaPulse Analytics</small>
+                </div>
+            </div>
+
+        </div>
+
+    </aside>
+
+    <main class="main">
+
+        <header class="topbar">
+
+            <div>
+                <h1>User Management</h1>
+                <p>Manage user accounts and access roles.</p>
+            </div>
+
+            <div class="top-actions">
+
+                <div class="profile">
+                    <%= user.fullName
+                        .split(" ")
+                        .map(name => name[0])
+                        .join("")
+                        .substring(0, 2)
+                        .toUpperCase()
+                    %>
+                </div>
+
+            </div>
+
+        </header>
+
+        <div class="page-kpis">
+
+            <div class="page-kpi">
+                <span>Total Users</span>
+                <strong><%= users.length %></strong>
+            </div>
+
+            <div class="page-kpi">
+                <span>Active Users</span>
+                <strong>
+                    <%= users.filter(item => item.status === "active").length %>
+                </strong>
+            </div>
+
+            <div class="page-kpi">
+                <span>Inactive Users</span>
+                <strong>
+                    <%= users.filter(item => item.status !== "active").length %>
+                </strong>
+            </div>
+
+            <div class="page-kpi">
+                <span>Administrators</span>
+                <strong>
+                    <%= users.filter(item => item.role === "admin").length %>
+                </strong>
+            </div>
+
+        </div>
+
+        <section class="table-panel">
+
+            <div class="panel-header">
+
+                <div>
+                    <h3>System Users</h3>
+                    <p>Manage accounts and access permissions.</p>
+                </div>
+
+            </div>
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Username</th>
+                            <th>Role</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <% users.forEach(item => { %>
+
+                            <tr>
+
+                                <td>
+                                    <%= item.id %>
+                                </td>
+
+                                <td>
+                                    <strong>
+                                        <%= item.fullName %>
+                                    </strong>
+                                </td>
+
+                                <td>
+                                    <%= item.username %>
+                                </td>
+
+                                <td>
+                                    <span class="badge">
+                                        <%= item.role %>
+                                    </span>
+                                </td>
+
+                                <td>
+
+                                    <span
+                                        class="badge <%= item.status === 'active' ? 'status-active' : 'status-inactive' %>"
+                                    >
+                                        <%= item.status %>
+                                    </span>
+
+                                </td>
+
+                                <td>
+
+                                    <form
+                                        action="/users/<%= item.id %>/status"
+                                        method="POST"
+                                    >
+
+                                        <button
+                                            type="submit"
+                                            class="secondary-button"
+                                        >
+                                            <%= item.status === "active"
+                                                ? "Deactivate"
+                                                : "Activate"
+                                            %>
+                                        </button>
+
+                                    </form>
+
+                                </td>
+
+                            </tr>
+
+                        <% }) %>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+        <footer>
+
+            <span>NexaPulse Analytics</span>
+
+            <span>Business Intelligence Dashboard</span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+</body>
+</html>
