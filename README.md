@@ -423,7 +423,7 @@ Potential improvements include:
 
 ## 👨‍💻 Developer
 
-**Christian Aquino**
+**Christian Russel P. Aquino**
 
 Bachelor of Science in Information Technology
 STI College Las Piñas
