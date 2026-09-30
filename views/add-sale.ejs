@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Add Sale | NexaPulse Analytics</title>
+
+    <link
+        rel="stylesheet"
+        href="/css/dashboard.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/css/pages.css"
+    >
+
+</head>
+
+<body>
+
+<div class="app">
+
+    <aside class="sidebar">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                N
+            </div>
+
+            <div>
+                <h2>NexaPulse</h2>
+                <span>Analytics</span>
+            </div>
+
+        </div>
+
+
+        <nav>
+
+            <a href="/">
+                <span>▦</span>
+                Dashboard
+            </a>
+
+            <a href="/sales" class="active">
+                <span>◫</span>
+                Sales
+            </a>
+
+            <a href="/customers">
+                <span>◉</span>
+                Customers
+            </a>
+
+            <a href="/products">
+                <span>▤</span>
+                Products
+            </a>
+
+            <a href="/regions">
+                <span>◌</span>
+                Regions
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <main class="main">
+
+        <div class="topbar">
+
+            <div>
+
+                <h1>Add Sales Data</h1>
+
+                <p>
+                    Enter a new business transaction.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="table-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <h3>
+                        Sales Information
+                    </h3>
+
+                    <p>
+                        Complete all required fields.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <form
+                action="/sales/new"
+                method="POST"
+                class="data-form"
+            >
+
+                <div class="form-grid">
+
+                    <div class="form-field">
+
+                        <label>Month</label>
+
+                        <input
+                            type="text"
+                            name="month"
+                            placeholder="July"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label>Customer</label>
+
+                        <input
+                            type="text"
+                            name="customer"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label>Region</label>
+
+                        <select
+                            name="region"
+                            required
+                        >
+
+                            <option value="">
+                                Select region
+                            </option>
+
+                            <option>Metro Manila</option>
+                            <option>Luzon</option>
+                            <option>Cebu</option>
+                            <option>Davao</option>
+                            <option>Visayas</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label>Category</label>
+
+                        <select
+                            name="category"
+                            required
+                        >
+
+                            <option value="">
+                                Select category
+                            </option>
+
+                            <option>Hardware</option>
+                            <option>Software</option>
+                            <option>Networking</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label>Product</label>
+
+                        <input
+                            type="text"
+                            name="product"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label>Quantity</label>
+
+                        <input
+                            type="number"
+                            name="quantity"
+                            min="1"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label>Revenue</label>
+
+                        <input
+                            type="number"
+                            name="revenue"
+                            min="0"
+                            step="0.01"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label>Profit</label>
+
+                        <input
+                            type="number"
+                            name="profit"
+                            min="0"
+                            step="0.01"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <a
+                        href="/sales"
+                        class="secondary-button"
+                    >
+                        Cancel
+                    </a>
+
+                    <button
+                        type="submit"
+                        class="primary-button"
+                    >
+                        Save Sales Data
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+
+</html>

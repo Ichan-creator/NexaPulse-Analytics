@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "fullName": "System Administrator",
+        "username": "admin",
+        "password": "$2b$10$wQmZ5QjY5Q8z8fJ0Vj7xQe7hVY7j9h5Qf8mF1yX0X9gV5m5V6fK7a",
+        "role": "admin",
+        "status": "active"
+    },
+    {
+        "id": 2,
+        "fullName": "Business Analyst",
+        "username": "analyst",
+        "password": "$2b$10$wQmZ5QjY5Q8z8fJ0Vj7xQe7hVY7j9h5Qf8mF1yX0X9gV5m5V6fK7a",
+        "role": "analyst",
+        "status": "active"
+    },
+    {
+        "id": 3,
+        "fullName": "Dashboard Viewer",
+        "username": "viewer",
+        "password": "$2b$10$wQmZ5QjY5Q8z8fJ0Vj7xQe7hVY7j9h5Qf8mF1yX0X9gV5m5V6fK7a",
+        "role": "viewer",
+        "status": "active"
+    }
+]
