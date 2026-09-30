@@ -1,0 +1,26 @@
+{
+  "name": "nexapulse-analytics",
+  "version": "1.0.0",
+  "description": "Business Intelligence and Analytics Dashboard",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "keywords": [
+    "power-bi",
+    "analytics",
+    "dashboard",
+    "business-intelligence"
+  ],
+  "author": "Christian Aquino",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "ejs": "^6.0.1",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}

@@ -1,0 +1,134 @@
+[
+    {
+        "id": 1001,
+        "month": "January",
+        "customer": "Acme Corp",
+        "region": "Metro Manila",
+        "category": "Hardware",
+        "product": "Laptop",
+        "quantity": 5,
+        "revenue": 225000,
+        "profit": 50000
+    },
+    {
+        "id": 1002,
+        "month": "January",
+        "customer": "Tech Solutions",
+        "region": "Cebu",
+        "category": "Software",
+        "product": "Microsoft 365",
+        "quantity": 20,
+        "revenue": 110000,
+        "profit": 46000
+    },
+    {
+        "id": 1003,
+        "month": "February",
+        "customer": "Global Retail",
+        "region": "Davao",
+        "category": "Hardware",
+        "product": "Monitor",
+        "quantity": 10,
+        "revenue": 120000,
+        "profit": 40000
+    },
+    {
+        "id": 1004,
+        "month": "February",
+        "customer": "Prime Services",
+        "region": "Metro Manila",
+        "category": "Networking",
+        "product": "Router",
+        "quantity": 8,
+        "revenue": 68000,
+        "profit": 24000
+    },
+    {
+        "id": 1005,
+        "month": "March",
+        "customer": "ABC Trading",
+        "region": "Luzon",
+        "category": "Hardware",
+        "product": "Desktop PC",
+        "quantity": 6,
+        "revenue": 228000,
+        "profit": 54000
+    },
+    {
+        "id": 1006,
+        "month": "March",
+        "customer": "Digital Hub",
+        "region": "Cebu",
+        "category": "Software",
+        "product": "Antivirus",
+        "quantity": 30,
+        "revenue": 75000,
+        "profit": 39000
+    },
+    {
+        "id": 1007,
+        "month": "April",
+        "customer": "Northstar Inc.",
+        "region": "Luzon",
+        "category": "Networking",
+        "product": "Network Switch",
+        "quantity": 12,
+        "revenue": 78000,
+        "profit": 30000
+    },
+    {
+        "id": 1008,
+        "month": "April",
+        "customer": "Metro Retail",
+        "region": "Metro Manila",
+        "category": "Hardware",
+        "product": "Keyboard",
+        "quantity": 40,
+        "revenue": 72000,
+        "profit": 36000
+    },
+    {
+        "id": 1009,
+        "month": "May",
+        "customer": "Visayas Tech",
+        "region": "Cebu",
+        "category": "Hardware",
+        "product": "Laptop",
+        "quantity": 7,
+        "revenue": 315000,
+        "profit": 70000
+    },
+    {
+        "id": 1010,
+        "month": "May",
+        "customer": "Southern Corp.",
+        "region": "Davao",
+        "category": "Networking",
+        "product": "Router",
+        "quantity": 10,
+        "revenue": 85000,
+        "profit": 30000
+    },
+    {
+        "id": 1011,
+        "month": "June",
+        "customer": "Pacific Systems",
+        "region": "Metro Manila",
+        "category": "Software",
+        "product": "Microsoft 365",
+        "quantity": 25,
+        "revenue": 137500,
+        "profit": 57500
+    },
+    {
+        "id": 1012,
+        "month": "June",
+        "customer": "Smart Business",
+        "region": "Luzon",
+        "category": "Hardware",
+        "product": "Desktop PC",
+        "quantity": 8,
+        "revenue": 304000,
+        "profit": 72000
+    }
+]

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Sales | NexaPulse Analytics</title>
+
+    <link
+        rel="stylesheet"
+        href="/css/dashboard.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/css/pages.css"
+    >
+
+</head>
+
+
+<body>
+
+<div class="app">
+
+
+    <aside class="sidebar">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                N
+            </div>
+
+            <div>
+                <h2>NexaPulse</h2>
+                <span>Analytics</span>
+            </div>
+
+        </div>
+
+
+        <nav>
+
+            <a href="/">
+                <span>▦</span>
+                Dashboard
+            </a>
+
+            <a href="/sales" class="active">
+                <span>◫</span>
+                Sales
+            </a>
+
+            <a href="/customers">
+                <span>◉</span>
+                Customers
+            </a>
+
+            <a href="/products">
+                <span>▤</span>
+                Products
+            </a>
+
+            <a href="/regions">
+                <span>◌</span>
+                Regions
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="system-status">
+
+                <span class="status-dot"></span>
+
+                <div>
+                    <strong>System Online</strong>
+                    <small>Data updated today</small>
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+
+    <main class="main">
+
+
+        <header class="topbar">
+
+            <div>
+
+                <h1>Sales Overview</h1>
+
+                <p>
+                    Analyze sales transactions and revenue performance.
+                </p>
+
+            </div>
+
+        </header>
+
+
+
+        <section class="page-kpis">
+
+            <div class="page-kpi">
+
+                <span>Total Revenue</span>
+
+                <strong>
+                    ₱<%= Number(totalRevenue).toLocaleString() %>
+                </strong>
+
+            </div>
+
+
+            <div class="page-kpi">
+
+                <span>Total Profit</span>
+
+                <strong>
+                    ₱<%= Number(totalProfit).toLocaleString() %>
+                </strong>
+
+            </div>
+
+
+            <div class="page-kpi">
+
+                <span>Total Orders</span>
+
+                <strong>
+                    <%= totalOrders %>
+                </strong>
+
+            </div>
+
+
+            <div class="page-kpi">
+
+                <span>Average Order</span>
+
+                <strong>
+                    ₱<%= Number(averageOrderValue).toLocaleString(
+                        undefined,
+                        {
+                            maximumFractionDigits: 0
+                        }
+                    ) %>
+                </strong>
+
+            </div>
+
+        </section>
+
+
+
+        <section class="table-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <h3>Sales Transactions</h3>
+
+                    <p>
+                        Complete sales activity
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>ID</th>
+                            <th>Month</th>
+                            <th>Customer</th>
+                            <th>Region</th>
+                            <th>Category</th>
+                            <th>Product</th>
+                            <th>Qty</th>
+                            <th>Revenue</th>
+                            <th>Profit</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        <% sales.forEach(item => { %>
+
+                            <tr>
+
+                                <td>
+                                    #<%= item.id %>
+                                </td>
+
+                                <td>
+                                    <%= item.month %>
+                                </td>
+
+                                <td>
+                                    <%= item.customer %>
+                                </td>
+
+                                <td>
+                                    <%= item.region %>
+                                </td>
+
+                                <td>
+                                    <span class="badge">
+                                        <%= item.category %>
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <%= item.product %>
+                                </td>
+
+                                <td>
+                                    <%= item.quantity %>
+                                </td>
+
+                                <td>
+                                    ₱<%= Number(
+                                        item.revenue
+                                    ).toLocaleString() %>
+                                </td>
+
+                                <td class="profit">
+
+                                    ₱<%= Number(
+                                        item.profit
+                                    ).toLocaleString() %>
+
+                                </td>
+
+                            </tr>
+
+                        <% }) %>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+</div>
+
+</body>
+</html>

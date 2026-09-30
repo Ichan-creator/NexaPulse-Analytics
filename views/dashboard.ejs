@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NexaPulse Analytics</title>
+
+    <link rel="stylesheet" href="/css/dashboard.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<div class="app">
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-icon">
+                N
+            </div>
+            <div>
+                <h2>NexaPulse</h2>
+                <span>Analytics</span>
+            </div>
+        </div>
+<nav>
+    <a href="/" class="active">
+        <span>▦</span>
+        <span>Dashboard</span>
+    </a>
+
+    <a href="/sales">
+        <span>◫</span>
+        <span>Sales</span>
+    </a>
+
+    <a href="/customers">
+        <span>◉</span>
+        <span>Customers</span>
+    </a>
+
+    <a href="/products">
+        <span>▤</span>
+        <span>Products</span>
+    </a>
+
+    <a href="/regions">
+        <span>◌</span>
+        <span>Regions</span>
+    </a>
+</nav>
+        <div class="sidebar-bottom">
+            <div class="system-status">
+                <span class="status-dot"></span>
+                <div>
+                    <strong>System Online</strong>
+                    <small>Data updated today</small>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main">
+        <header class="topbar">
+            <div>
+                <h1>Business Overview</h1>
+                <p>
+                    Monitor your business performance and key metrics.
+                </p>
+            </div>
+            <div class="top-actions">
+                <button class="date-button">
+                    2026
+                </button>
+                <div class="profile">
+                    CA
+                </div>
+            </div>
+        </header>
+
+        <section class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-header">
+                    <span>Total Revenue</span>
+                    <div class="kpi-icon">
+                        ₱
+                    </div>
+                </div>
+                <h2>
+                    ₱<%= Number(totalRevenue || 0).toLocaleString() %>
+                </h2>
+                <span class="positive">
+                    ↑ 12.8% from previous period
+                </span>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-header">
+                    <span>Total Profit</span>
+                    <div class="kpi-icon">
+                        ↗
+                    </div>
+                </div>
+                <h2>
+                    ₱<%= Number(totalProfit || 0).toLocaleString() %>
+                </h2>
+                <span class="positive">
+                    ↑ 8.4% from previous period
+                </span>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-header">
+                    <span>Total Orders</span>
+                    <div class="kpi-icon">
+                        ▣
+                    </div>
+                </div>
+                <h2>
+                    <%= totalOrders || 0 %>
+                </h2>
+                <span class="positive">
+                    ↑ 6.2% from previous period
+                </span>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-header">
+                    <span>Customers</span>
+                    <div class="kpi-icon">
+                        ●
+                    </div>
+                </div>
+                <h2>
+                    <%= totalCustomers || 0 %>
+                </h2>
+                <span class="positive">
+                    ↑ 4.7% from previous period
+                </span>
+            </div>
+        </section>
+        <section class="chart-grid">
+            <div class="panel large">
+                <div class="panel-header">
+                    <div>
+                        <h3>Revenue Performance</h3>
+                        <p>
+                            Monthly revenue trend
+                        </p>
+                    </div>
+                </div>
+                <canvas id="revenueChart"></canvas>
+            </div>
+            <div class="panel">
+                <div class="panel-header">
+                    <div>
+                        <h3>Sales by Category</h3>
+                        <p>
+                            Revenue distribution
+                        </p>
+                    </div>
+                </div>
+                <canvas id="categoryChart"></canvas>
+            </div>
+        </section>
+        <section class="chart-grid">
+            <div class="panel">
+                <div class="panel-header">
+                    <div>
+                        <h3>Regional Performance</h3>
+                        <p>
+                            Revenue by region
+                        </p>
+                    </div>
+                </div>
+                <canvas id="regionChart"></canvas>
+            </div>
+            <div class="panel">
+                <div class="panel-header">
+                    <div>
+                        <h3>Top Products</h3>
+                        <p>
+                            Highest revenue products
+                        </p>
+                    </div>
+                </div>
+                <div class="product-list">
+                    <% if (topProducts && topProducts.length > 0) { %>
+                        <% topProducts.forEach((product, index) => { %>
+                            <div class="product">
+                                <div class="rank">
+                                    <%= index + 1 %>
+                                </div>
+                                <div class="product-info">
+                                    <strong>
+                                        <%= product[0] %>
+                                    </strong>
+                                    <div class="product-bar">
+                                        <span
+                                            class="product-progress"
+                                            data-value="<%= topProducts[0][1] > 0
+                                                ? Math.min(
+                                                    (product[1] / topProducts[0][1]) * 100,
+                                                    100
+                                                )
+                                                : 0 %>">
+                                        </span>
+                                    </div>
+                                </div>
+                                <strong>
+                                    ₱<%= Number(product[1] || 0).toLocaleString() %>
+                                </strong>
+                            </div>
+                        <% }) %>
+                    <% } else { %>
+                        <p class="no-data">
+                            No product data available.
+                        </p>
+                    <% } %>
+                </div>
+            </div>
+        </section>
+        <footer>
+            <span>
+                © 2026 NexaPulse Analytics
+            </span>
+            <span>
+                Business Intelligence Platform
+            </span>
+        </footer>
+    </main>
+</div>
+<div
+    id="chartData"
+    data-monthly='<%- JSON.stringify(monthlyData || {}) %>'
+    data-category='<%- JSON.stringify(categoryData || {}) %>'
+    data-region='<%- JSON.stringify(regionData || {}) %>'>
+</div>
+<script src="/js/dashboard.js"></script>
+
+</body>
+</html>

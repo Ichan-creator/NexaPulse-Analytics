@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Products | NexaPulse Analytics</title>
+
+    <link
+        rel="stylesheet"
+        href="/css/dashboard.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/css/pages.css"
+    >
+
+</head>
+
+
+<body>
+
+<div class="app">
+
+
+    <aside class="sidebar">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                N
+            </div>
+
+            <div>
+                <h2>NexaPulse</h2>
+                <span>Analytics</span>
+            </div>
+
+        </div>
+
+
+        <nav>
+
+            <a href="/">
+                <span>▦</span>
+                Dashboard
+            </a>
+
+            <a href="/sales">
+                <span>◫</span>
+                Sales
+            </a>
+
+            <a href="/customers">
+                <span>◉</span>
+                Customers
+            </a>
+
+            <a href="/products" class="active">
+                <span>▤</span>
+                Products
+            </a>
+
+            <a href="/regions">
+                <span>◌</span>
+                Regions
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="system-status">
+
+                <span class="status-dot"></span>
+
+                <div>
+                    <strong>System Online</strong>
+                    <small>Data updated today</small>
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+
+    <main class="main">
+
+
+        <header class="topbar">
+
+            <div>
+
+                <h1>Products</h1>
+
+                <p>
+                    Monitor product performance and profitability.
+                </p>
+
+            </div>
+
+        </header>
+
+
+
+        <section class="table-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <h3>Product Performance</h3>
+
+                    <p>
+                        Revenue, units and profit by product
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Product</th>
+                            <th>Category</th>
+                            <th>Orders</th>
+                            <th>Units</th>
+                            <th>Revenue</th>
+                            <th>Profit</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        <% products.forEach(product => { %>
+
+                            <tr>
+
+                                <td>
+
+                                    <strong>
+                                        <%= product.name %>
+                                    </strong>
+
+                                </td>
+
+                                <td>
+
+                                    <span class="badge">
+                                        <%= product.category %>
+                                    </span>
+
+                                </td>
+
+                                <td>
+                                    <%= product.orders %>
+                                </td>
+
+                                <td>
+                                    <%= product.units %>
+                                </td>
+
+                                <td>
+
+                                    ₱<%= Number(
+                                        product.revenue
+                                    ).toLocaleString() %>
+
+                                </td>
+
+                                <td class="profit">
+
+                                    ₱<%= Number(
+                                        product.profit
+                                    ).toLocaleString() %>
+
+                                </td>
+
+                            </tr>
+
+                        <% }) %>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+</div>
+
+</body>
+</html>
