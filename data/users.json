@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "fullName": "Christian Aquino",
+        "fullName": "System Administrator",
         "username": "admin",
         "password": "$2b$10$IVLExJMgq2pAAJOIQOSTCuOHZHnxCvhy.bzR0diNaEJIPCrbLCMN2",
         "role": "admin",
