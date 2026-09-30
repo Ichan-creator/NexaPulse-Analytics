@@ -3,7 +3,7 @@
         "id": 1,
         "fullName": "Christian Aquino",
         "username": "admin",
-        "password": "admin123",
+        "password": "$2b$10$ABC123...",
         "role": "admin",
         "status": "active"
     },
@@ -11,7 +11,7 @@
         "id": 2,
         "fullName": "Business Analyst",
         "username": "analyst",
-        "password": "analyst123",
+        "password": "$2b$10$DEF456...",
         "role": "analyst",
         "status": "active"
     },
@@ -19,7 +19,7 @@
         "id": 3,
         "fullName": "Dashboard Viewer",
         "username": "viewer",
-        "password": "viewer123",
+        "password": "$2b$10$GHI789...",
         "role": "viewer",
         "status": "active"
     }
