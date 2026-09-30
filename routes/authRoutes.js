@@ -10,9 +10,8 @@ const usersPath = path.join(
     "../data/users.json"
 );
 
-// LOGIN PAGE
+// Login page
 router.get("/login", (req, res) => {
-
     if (req.session.user) {
         return res.redirect("/");
     }
@@ -22,9 +21,8 @@ router.get("/login", (req, res) => {
     });
 });
 
-// LOGIN
+// Login
 router.post("/login", (req, res) => {
-
     const {
         username,
         password
@@ -74,14 +72,17 @@ router.post("/login", (req, res) => {
     res.redirect("/");
 });
 
-// LOGOUT
+// Logout
 router.get("/logout", (req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            return res.status(500).send("Unable to log out.");
+        }
 
-    req.session.destroy(() => {
+        res.clearCookie("connect.sid");
+
         res.redirect("/login");
     });
-
 });
-
 
 module.exports = router;
