@@ -1,9 +1,9 @@
 [
     {
         "id": 1,
-        "fullName": "System Administrator",
+        "fullName": "Christian Aquino",
         "username": "admin",
-        "password": "$2b$10$wQmZ5QjY5Q8z8fJ0Vj7xQe7hVY7j9h5Qf8mF1yX0X9gV5m5V6fK7a",
+        "password": "admin123",
         "role": "admin",
         "status": "active"
     },
@@ -11,7 +11,7 @@
         "id": 2,
         "fullName": "Business Analyst",
         "username": "analyst",
-        "password": "$2b$10$wQmZ5QjY5Q8z8fJ0Vj7xQe7hVY7j9h5Qf8mF1yX0X9gV5m5V6fK7a",
+        "password": "analyst123",
         "role": "analyst",
         "status": "active"
     },
@@ -19,7 +19,7 @@
         "id": 3,
         "fullName": "Dashboard Viewer",
         "username": "viewer",
-        "password": "$2b$10$wQmZ5QjY5Q8z8fJ0Vj7xQe7hVY7j9h5Qf8mF1yX0X9gV5m5V6fK7a",
+        "password": "viewer123",
         "role": "viewer",
         "status": "active"
     }
