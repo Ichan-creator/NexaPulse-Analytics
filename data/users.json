@@ -3,23 +3,23 @@
         "id": 1,
         "fullName": "Christian Aquino",
         "username": "admin",
-        "password": "$2b$10$1OxM2UiX6MaO3rhBqNzvGOW7jxnaZQhCLAzPadz1XZPraMkL1lr3S",
+        "password": "$2b$10$IVLExJMgq2pAAJOIQOSTCuOHZHnxCvhy.bzR0diNaEJIPCrbLCMN2",
         "role": "admin",
         "status": "active"
     },
     {
         "id": 2,
-        "fullName": "Business Analyst",
+        "fullName": "NexaPulse Analyst",
         "username": "analyst",
-        "password": "$2b$10$DEF456...",
+        "password": "$2b$10$UJ3p1VgiUYYLkfufbn2UIOfxTa0IyTrXw4Bqd2l.C6PO.pvFNrhNy",
         "role": "analyst",
         "status": "active"
     },
     {
         "id": 3,
-        "fullName": "Dashboard Viewer",
+        "fullName": "NexaPulse Viewer",
         "username": "viewer",
-        "password": "$2b$10$GHI789...",
+        "password": "$2b$10$xAw2Ce1201r6DbnstEl2lOj5sSxRQ7aq51sqwpFYgPiQMXqtVk2.K",
         "role": "viewer",
         "status": "active"
     }
