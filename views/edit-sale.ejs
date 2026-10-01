@@ -10,7 +10,12 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Edit Sales Data - NexaPulse Analytics</title>
+    <title>Edit Sales | NexaPulse Analytics</title>
+
+    <link
+        rel="stylesheet"
+        href="/css/dashboard.css"
+    >
 
     <link
         rel="stylesheet"
@@ -19,158 +24,591 @@
 
 </head>
 
+
 <body>
 
-<div class="page-container">
+<div class="app">
 
-    <div class="page-header">
+    <!-- SIDEBAR -->
 
-        <div>
+    <aside class="sidebar">
 
-            <h1>Edit Sales Data</h1>
+        <div class="brand">
 
-            <p>
-                Update an existing sales record.
-            </p>
+            <div class="brand-icon">
+                N
+            </div>
+
+            <div>
+                <h2>NexaPulse</h2>
+                <span>Analytics</span>
+            </div>
 
         </div>
 
-        <a
-            href="/sales"
-            class="back-button"
-        >
-            Back to Sales
-        </a>
 
-    </div>
+        <nav>
+
+            <a href="/">
+                <span>▦</span>
+                <span>Dashboard</span>
+            </a>
 
 
-    <form
-        action="/sales/edit/<%= sale.id %>"
-        method="POST"
-        class="data-form"
-    >
+            <a href="/sales" class="active">
+                <span>◫</span>
+                <span>Sales</span>
+            </a>
 
-        <div class="form-group">
 
-            <label>Month</label>
+            <a href="/customers">
+                <span>◉</span>
+                <span>Customers</span>
+            </a>
 
-            <input
-                type="text"
-                name="month"
-                value="<%= sale.month %>"
-                required
+
+            <a href="/products">
+                <span>▤</span>
+                <span>Products</span>
+            </a>
+
+
+            <a href="/regions">
+                <span>◌</span>
+                <span>Regions</span>
+            </a>
+
+
+            <% if (
+                user &&
+                (
+                    user.role === "admin" ||
+                    user.role === "analyst"
+                )
+            ) { %>
+
+                <a href="/sales/new">
+
+                    <span>＋</span>
+                    <span>Data Ingestion</span>
+
+                </a>
+
+            <% } %>
+
+
+            <% if (
+                user &&
+                user.role === "admin"
+            ) { %>
+
+                <a href="/users">
+
+                    <span>♙</span>
+                    <span>Users</span>
+
+                </a>
+
+            <% } %>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="system-status">
+
+                <span class="status-dot"></span>
+
+                <div>
+
+                    <strong>System Online</strong>
+
+                    <small>
+                        Data updated today
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <a
+                href="/logout"
+                class="logout-button"
             >
 
-        </div>
+                <span>↪</span>
+                <span>Logout</span>
 
-
-        <div class="form-group">
-
-            <label>Customer</label>
-
-            <input
-                type="text"
-                name="customer"
-                value="<%= sale.customer %>"
-                required
-            >
+            </a>
 
         </div>
 
-
-        <div class="form-group">
-
-            <label>Region</label>
-
-            <input
-                type="text"
-                name="region"
-                value="<%= sale.region %>"
-                required
-            >
-
-        </div>
+    </aside>
 
 
-        <div class="form-group">
+    <!-- MAIN -->
 
-            <label>Category</label>
+    <main class="main">
 
-            <input
-                type="text"
-                name="category"
-                value="<%= sale.category %>"
-                required
-            >
+        <!-- TOPBAR -->
 
-        </div>
+        <header class="topbar">
 
+            <div>
 
-        <div class="form-group">
+                <h1>Edit Sales Data</h1>
 
-            <label>Product</label>
+                <p>
+                    Update an existing sales transaction.
+                </p>
 
-            <input
-                type="text"
-                name="product"
-                value="<%= sale.product %>"
-                required
-            >
-
-        </div>
+            </div>
 
 
-        <div class="form-group">
+            <div class="top-actions">
 
-            <label>Quantity</label>
+                <div class="profile">
 
-            <input
-                type="number"
-                name="quantity"
-                value="<%= sale.quantity %>"
-                required
-            >
+                    <% if (
+                        user &&
+                        user.fullName
+                    ) { %>
 
-        </div>
+                        <%= user.fullName
+                            .split(" ")
+                            .map(name => name[0])
+                            .join("")
+                            .substring(0, 2)
+                            .toUpperCase()
+                        %>
 
+                    <% } else { %>
 
-        <div class="form-group">
+                        CA
 
-            <label>Revenue</label>
+                    <% } %>
 
-            <input
-                type="number"
-                name="revenue"
-                value="<%= sale.revenue %>"
-                required
-            >
+                </div>
 
-        </div>
+            </div>
 
-
-        <div class="form-group">
-
-            <label>Profit</label>
-
-            <input
-                type="number"
-                name="profit"
-                value="<%= sale.profit %>"
-                required
-            >
-
-        </div>
+        </header>
 
 
-        <button
-            type="submit"
-            class="primary-button"
-        >
-            Save Changes
-        </button>
+        <!-- PAGE CONTENT -->
 
-    </form>
+        <section class="edit-page">
+
+            <div class="edit-container">
+
+
+                <!-- FORM HEADER -->
+
+                <div class="edit-header">
+
+                    <div class="edit-icon">
+                        ✎
+                    </div>
+
+                    <div>
+
+                        <h2>
+                            Edit Transaction
+                        </h2>
+
+                        <p>
+                            Update the information below and save your changes.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- RECORD INFORMATION -->
+
+                <div class="record-info">
+
+                    <div>
+
+                        <span>
+                            Record ID
+                        </span>
+
+                        <strong>
+                            #<%= sale.id %>
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Current Product
+                        </span>
+
+                        <strong>
+                            <%= sale.product %>
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Updated By
+                        </span>
+
+                        <strong>
+                            <%= user.fullName %>
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FORM -->
+
+                <form
+                    action="/sales/edit/<%= sale.id %>"
+                    method="POST"
+                    class="sales-form"
+                >
+
+
+                    <div class="form-section">
+
+                        <div class="form-section-title">
+
+                            <span>01</span>
+
+                            <div>
+
+                                <h3>
+                                    Transaction Details
+                                </h3>
+
+                                <p>
+                                    Basic information about the sale.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-grid">
+
+
+                            <!-- MONTH -->
+
+                            <div class="form-group">
+
+                                <label for="month">
+                                    Month
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="month"
+                                    name="month"
+                                    value="<%= sale.month %>"
+                                    placeholder="e.g. January"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <!-- CUSTOMER -->
+
+                            <div class="form-group">
+
+                                <label for="customer">
+                                    Customer
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="customer"
+                                    name="customer"
+                                    value="<%= sale.customer %>"
+                                    placeholder="Customer name"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <!-- REGION -->
+
+                            <div class="form-group">
+
+                                <label for="region">
+                                    Region
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="region"
+                                    name="region"
+                                    value="<%= sale.region %>"
+                                    placeholder="e.g. Metro Manila"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <!-- CATEGORY -->
+
+                            <div class="form-group">
+
+                                <label for="category">
+                                    Category
+                                </label>
+
+                                <select
+                                    id="category"
+                                    name="category"
+                                    required
+                                >
+
+                                    <option
+                                        value="Hardware"
+                                        <%= sale.category === "Hardware" ? "selected" : "" %>
+                                    >
+                                        Hardware
+                                    </option>
+
+                                    <option
+                                        value="Software"
+                                        <%= sale.category === "Software" ? "selected" : "" %>
+                                    >
+                                        Software
+                                    </option>
+
+                                    <option
+                                        value="Networking"
+                                        <%= sale.category === "Networking" ? "selected" : "" %>
+                                    >
+                                        Networking
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PRODUCT SECTION -->
+
+                    <div class="form-section">
+
+                        <div class="form-section-title">
+
+                            <span>02</span>
+
+                            <div>
+
+                                <h3>
+                                    Product Information
+                                </h3>
+
+                                <p>
+                                    Update the product and sales quantity.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-grid">
+
+
+                            <!-- PRODUCT -->
+
+                            <div class="form-group full-width">
+
+                                <label for="product">
+                                    Product
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="product"
+                                    name="product"
+                                    value="<%= sale.product %>"
+                                    placeholder="Product name"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <!-- QUANTITY -->
+
+                            <div class="form-group">
+
+                                <label for="quantity">
+                                    Quantity
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="quantity"
+                                    name="quantity"
+                                    value="<%= sale.quantity %>"
+                                    min="1"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- FINANCIAL SECTION -->
+
+                    <div class="form-section">
+
+                        <div class="form-section-title">
+
+                            <span>03</span>
+
+                            <div>
+
+                                <h3>
+                                    Financial Information
+                                </h3>
+
+                                <p>
+                                    Update the revenue and profit values.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-grid">
+
+
+                            <!-- REVENUE -->
+
+                            <div class="form-group">
+
+                                <label for="revenue">
+                                    Revenue
+                                </label>
+
+                                <div class="input-prefix">
+
+                                    <span>₱</span>
+
+                                    <input
+                                        type="number"
+                                        id="revenue"
+                                        name="revenue"
+                                        value="<%= sale.revenue %>"
+                                        min="0"
+                                        step="0.01"
+                                        required
+                                    >
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- PROFIT -->
+
+                            <div class="form-group">
+
+                                <label for="profit">
+                                    Profit
+                                </label>
+
+                                <div class="input-prefix">
+
+                                    <span>₱</span>
+
+                                    <input
+                                        type="number"
+                                        id="profit"
+                                        name="profit"
+                                        value="<%= sale.profit %>"
+                                        min="0"
+                                        step="0.01"
+                                        required
+                                    >
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ACTIONS -->
+
+                    <div class="form-actions">
+
+                        <a
+                            href="/sales"
+                            class="cancel-button"
+                        >
+                            Cancel
+                        </a>
+
+
+                        <button
+                            type="submit"
+                            class="save-button"
+                        >
+
+                            <span>✓</span>
+
+                            Save Changes
+
+                        </button>
+
+                    </div>
+
+
+                </form>
+
+            </div>
+
+        </section>
+
+
+        <footer>
+
+            <span>
+                © 2026 NexaPulse Analytics
+            </span>
+
+            <span>
+                Business Intelligence Platform
+            </span>
+
+        </footer>
+
+    </main>
 
 </div>
 
