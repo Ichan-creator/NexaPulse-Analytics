@@ -452,3 +452,105 @@
     }
 
 }
+
+.actions-cell {
+    white-space: nowrap;
+}
+
+.action-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px 12px;
+    margin-right: 5px;
+    border: 0;
+    border-radius: 7px;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.edit-button {
+    background: #2563eb;
+    color: #ffffff;
+}
+
+.edit-button:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+}
+
+.delete-button {
+    background: #dc2626;
+    color: #ffffff;
+}
+
+.delete-button:hover {
+    background: #b91c1c;
+    transform: translateY(-1px);
+}
+
+.delete-form {
+    display: inline;
+    margin: 0;
+}
+
+@media (max-width: 1024px) {
+
+    .table-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .table-wrapper table {
+        min-width: 1000px;
+    }
+
+    .actions-cell {
+        white-space: nowrap;
+    }
+
+    .action-button {
+        padding: 7px 10px;
+        font-size: 12px;
+    }
+
+}
+
+@media (max-width: 768px) {
+
+    .table-wrapper {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    .table-wrapper table {
+        min-width: 1000px;
+    }
+
+    .action-button {
+        padding: 8px 10px;
+        font-size: 11px;
+        border-radius: 6px;
+    }
+
+    .actions-cell {
+        min-width: 130px;
+    }
+
+}
+
+@media (max-width: 480px) {
+
+    .action-button {
+        padding: 7px 9px;
+        font-size: 10px;
+    }
+
+    .actions-cell {
+        min-width: 120px;
+    }
+
+}
