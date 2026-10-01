@@ -38,37 +38,73 @@
                 <span>Dashboard</span>
             </a>
 
+
             <a href="/sales">
                 <span>◫</span>
                 <span>Sales</span>
             </a>
+
 
             <a href="/customers">
                 <span>◉</span>
                 <span>Customers</span>
             </a>
 
+
             <a href="/products">
                 <span>▤</span>
                 <span>Products</span>
             </a>
+
 
             <a href="/regions">
                 <span>◌</span>
                 <span>Regions</span>
             </a>
 
-            <% if (typeof user !== "undefined" && user && user.role === "admin") { %>
+
+            <!-- ADMIN + ANALYST -->
+
+            <% if (
+                typeof user !== "undefined" &&
+                user &&
+                (
+                    user.role === "admin" ||
+                    user.role === "analyst"
+                )
+            ) { %>
+
+                <a href="/sales/new">
+
+                    <span>＋</span>
+
+                    <span>Data Ingestion</span>
+
+                </a>
+
+            <% } %>
+
+
+            <!-- ADMIN ONLY -->
+
+            <% if (
+                typeof user !== "undefined" &&
+                user &&
+                user.role === "admin"
+            ) { %>
 
                 <a href="/users">
+
                     <span>♙</span>
+
                     <span>Users</span>
+
                 </a>
 
             <% } %>
 
         </nav>
-
+        
         <div class="sidebar-bottom">
 
             <div class="system-status">

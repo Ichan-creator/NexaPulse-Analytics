@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -30,6 +31,8 @@
 <div class="app">
 
 
+    <!-- SIDEBAR -->
+
     <aside class="sidebar">
 
         <div class="brand">
@@ -39,8 +42,11 @@
             </div>
 
             <div>
+
                 <h2>NexaPulse</h2>
+
                 <span>Analytics</span>
+
             </div>
 
         </div>
@@ -53,57 +59,115 @@
                 Dashboard
             </a>
 
+
             <a href="/sales" class="active">
                 <span>◫</span>
                 Sales
             </a>
+
 
             <a href="/customers">
                 <span>◉</span>
                 Customers
             </a>
 
+
             <a href="/products">
                 <span>▤</span>
                 Products
             </a>
+
 
             <a href="/regions">
                 <span>◌</span>
                 Regions
             </a>
 
+
+            <!-- ADMIN + ANALYST -->
+
+            <% if (
+                user &&
+                (
+                    user.role === "admin" ||
+                    user.role === "analyst"
+                )
+            ) { %>
+
+                <a href="/sales/new">
+
+                    <span>＋</span>
+
+                    Data Ingestion
+
+                </a>
+
+            <% } %>
+
+
+            <!-- ADMIN ONLY -->
+
+            <% if (
+                user &&
+                user.role === "admin"
+            ) { %>
+
+                <a href="/users">
+
+                    <span>♙</span>
+
+                    Users
+
+                </a>
+
+            <% } %>
+
         </nav>
 
 
         <div class="sidebar-bottom">
+
 
             <div class="system-status">
 
                 <span class="status-dot"></span>
 
                 <div>
+
                     <strong>System Online</strong>
-                    <small>Data updated today</small>
+
+                    <small>
+                        Data updated today
+                    </small>
+
                 </div>
 
             </div>
-            
-            <a href="/logout" class="logout-button">
+
+
+            <a
+                href="/logout"
+                class="logout-button"
+            >
 
                 <span>↪</span>
+
                 <span>Logout</span>
 
             </a>
+
 
         </div>
 
     </aside>
 
 
+    <!-- MAIN CONTENT -->
 
     <main class="main">
 
+
+        <!-- TOPBAR -->
 
         <header class="topbar">
 
@@ -117,18 +181,54 @@
 
             </div>
 
+
+            <div class="top-actions">
+
+                <div class="profile">
+
+                    <% if (
+                        user &&
+                        user.fullName
+                    ) { %>
+
+                        <%= user.fullName
+                            .split(" ")
+                            .map(name => name[0])
+                            .join("")
+                            .substring(0, 2)
+                            .toUpperCase()
+                        %>
+
+                    <% } else { %>
+
+                        CA
+
+                    <% } %>
+
+                </div>
+
+            </div>
+
         </header>
 
 
+        <!-- KPI CARDS -->
 
         <section class="page-kpis">
 
+
             <div class="page-kpi">
 
-                <span>Total Revenue</span>
+                <span>
+                    Total Revenue
+                </span>
 
                 <strong>
-                    ₱<%= Number(totalRevenue).toLocaleString() %>
+
+                    ₱<%= Number(
+                        totalRevenue
+                    ).toLocaleString() %>
+
                 </strong>
 
             </div>
@@ -136,10 +236,16 @@
 
             <div class="page-kpi">
 
-                <span>Total Profit</span>
+                <span>
+                    Total Profit
+                </span>
 
                 <strong>
-                    ₱<%= Number(totalProfit).toLocaleString() %>
+
+                    ₱<%= Number(
+                        totalProfit
+                    ).toLocaleString() %>
+
                 </strong>
 
             </div>
@@ -147,10 +253,14 @@
 
             <div class="page-kpi">
 
-                <span>Total Orders</span>
+                <span>
+                    Total Orders
+                </span>
 
                 <strong>
+
                     <%= totalOrders %>
+
                 </strong>
 
             </div>
@@ -158,30 +268,42 @@
 
             <div class="page-kpi">
 
-                <span>Average Order</span>
+                <span>
+                    Average Order
+                </span>
 
                 <strong>
-                    ₱<%= Number(averageOrderValue).toLocaleString(
+
+                    ₱<%= Number(
+                        averageOrderValue
+                    ).toLocaleString(
                         undefined,
                         {
                             maximumFractionDigits: 0
                         }
                     ) %>
+
                 </strong>
 
             </div>
 
+
         </section>
 
 
+        <!-- SALES TABLE -->
 
         <section class="table-panel">
 
+
             <div class="panel-header">
+
 
                 <div>
 
-                    <h3>Sales Transactions</h3>
+                    <h3>
+                        Sales Transactions
+                    </h3>
 
                     <p>
                         Complete sales activity
@@ -189,26 +311,77 @@
 
                 </div>
 
+
+                <!-- ADMIN + ANALYST -->
+
+                <% if (
+                    user &&
+                    (
+                        user.role === "admin" ||
+                        user.role === "analyst"
+                    )
+                ) { %>
+
+                    <a
+                        href="/sales/new"
+                        class="action-button edit-button"
+                    >
+
+                        + Add Sale
+
+                    </a>
+
+                <% } %>
+
+
             </div>
 
 
             <div class="table-wrapper">
 
+
                 <table>
+
 
                     <thead>
 
                         <tr>
 
                             <th>ID</th>
+
                             <th>Month</th>
+
                             <th>Customer</th>
+
                             <th>Region</th>
+
                             <th>Category</th>
+
                             <th>Product</th>
+
                             <th>Qty</th>
+
                             <th>Revenue</th>
+
                             <th>Profit</th>
+
+
+                            <!-- ACTIONS ONLY FOR ADMIN + ANALYST -->
+
+                            <% if (
+                                user &&
+                                (
+                                    user.role === "admin" ||
+                                    user.role === "analyst"
+                                )
+                            ) { %>
+
+                                <th>
+                                    Actions
+                                </th>
+
+                            <% } %>
+
 
                         </tr>
 
@@ -217,45 +390,74 @@
 
                     <tbody>
 
+
                         <% sales.forEach(item => { %>
+
 
                             <tr>
 
+
                                 <td>
+
                                     #<%= item.id %>
+
                                 </td>
 
+
                                 <td>
+
                                     <%= item.month %>
+
                                 </td>
 
+
                                 <td>
+
                                     <%= item.customer %>
+
                                 </td>
 
+
                                 <td>
+
                                     <%= item.region %>
+
                                 </td>
 
+
                                 <td>
+
                                     <span class="badge">
+
                                         <%= item.category %>
+
                                     </span>
+
                                 </td>
 
+
                                 <td>
+
                                     <%= item.product %>
+
                                 </td>
 
+
                                 <td>
+
                                     <%= item.quantity %>
+
                                 </td>
 
+
                                 <td>
+
                                     ₱<%= Number(
                                         item.revenue
                                     ).toLocaleString() %>
+
                                 </td>
+
 
                                 <td class="profit">
 
@@ -265,22 +467,92 @@
 
                                 </td>
 
+
+                                <!-- ADMIN + ANALYST ACTIONS -->
+
+                                <% if (
+                                    user &&
+                                    (
+                                        user.role === "admin" ||
+                                        user.role === "analyst"
+                                    )
+                                ) { %>
+
+
+                                    <td class="actions-cell">
+
+
+                                        <!-- EDIT -->
+
+                                        <a
+                                            href="/sales/edit/<%= item.id %>"
+                                            class="action-button edit-button"
+                                        >
+
+                                            Edit
+
+                                        </a>
+
+
+                                        <!-- ADMIN ONLY DELETE -->
+
+                                        <% if (
+                                            user.role === "admin"
+                                        ) { %>
+
+
+                                            <form
+                                                action="/sales/delete/<%= item.id %>"
+                                                method="POST"
+                                                class="delete-form"
+                                                onsubmit="return confirm('Are you sure you want to delete this sales record?');"
+                                            >
+
+                                                <button
+                                                    type="submit"
+                                                    class="action-button delete-button"
+                                                >
+
+                                                    Delete
+
+                                                </button>
+
+                                            </form>
+
+
+                                        <% } %>
+
+
+                                    </td>
+
+
+                                <% } %>
+
+
                             </tr>
+
 
                         <% }) %>
 
+
                     </tbody>
+
 
                 </table>
 
+
             </div>
+
 
         </section>
 
 
     </main>
 
+
 </div>
 
+
 </body>
+
 </html>
