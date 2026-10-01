@@ -1,14 +1,48 @@
 const express = require("express");
+const fs = require("fs");
+const path = require("path");
 
 const router = express.Router();
-
-const sales = require("../data/sales.json");
 
 const {
     requireLogin
 } = require("../middleware/authMiddleware");
 
+const salesPath = path.join(
+    __dirname,
+    "../data/sales.json"
+);
+
+// READ SALES DATA
+// Always read the latest version from sales.json
+function getSalesData() {
+
+    try {
+
+        const data = fs.readFileSync(
+            salesPath,
+            "utf8"
+        );
+
+        return JSON.parse(data);
+
+    } catch (error) {
+
+        console.error(
+            "ERROR READING SALES DATA:",
+            error
+        );
+
+        return [];
+
+    }
+}
+
+// DASHBOARD DATA
 function getDashboardData() {
+
+    const sales = getSalesData();
+
 
     const totalRevenue = sales.reduce(
         (sum, item) =>
@@ -44,6 +78,7 @@ function getDashboardData() {
             ? totalRevenue / totalOrders
             : 0;
 
+    // CATEGORY DATA
     const categoryData = {};
 
     sales.forEach(item => {
@@ -54,8 +89,10 @@ function getDashboardData() {
 
         categoryData[item.category] +=
             Number(item.revenue || 0);
+
     });
 
+    // REGION DATA
     const regionData = {};
 
     sales.forEach(item => {
@@ -66,8 +103,10 @@ function getDashboardData() {
 
         regionData[item.region] +=
             Number(item.revenue || 0);
+
     });
 
+    // MONTHLY DATA
     const monthlyData = {};
 
     sales.forEach(item => {
@@ -78,8 +117,10 @@ function getDashboardData() {
 
         monthlyData[item.month] +=
             Number(item.revenue || 0);
+
     });
 
+    // PRODUCT DATA
     const productData = {};
 
     sales.forEach(item => {
@@ -90,11 +131,19 @@ function getDashboardData() {
 
         productData[item.product] +=
             Number(item.revenue || 0);
+
     });
+
+
+    // =================================================
+    // TOP PRODUCTS
+    // =================================================
 
     const topProducts =
         Object.entries(productData)
-            .sort((a, b) => b[1] - a[1])
+            .sort(
+                (a, b) => b[1] - a[1]
+            )
             .slice(0, 5);
 
 
@@ -123,8 +172,10 @@ function getDashboardData() {
         topProducts
 
     };
+
 }
 
+// DASHBOARD
 router.get(
     "/",
     requireLogin,
@@ -146,10 +197,19 @@ router.get(
     }
 );
 
+// SALES
 router.get(
     "/sales",
     requireLogin,
     (req, res) => {
+
+        // IMPORTANT:
+        // Get the latest sales data every time
+        // the Sales page is opened.
+
+        const sales =
+            getSalesData();
+
 
         const data =
             getDashboardData();
@@ -171,10 +231,15 @@ router.get(
     }
 );
 
+// CUSTOMERS
 router.get(
     "/customers",
     requireLogin,
     (req, res) => {
+
+        const sales =
+            getSalesData();
+
 
         const customers = {};
 
@@ -236,10 +301,15 @@ router.get(
     }
 );
 
+// PRODUCTS
 router.get(
     "/products",
     requireLogin,
     (req, res) => {
+
+        const sales =
+            getSalesData();
+
 
         const products = {};
 
@@ -306,10 +376,15 @@ router.get(
     }
 );
 
+// REGIONS
 router.get(
     "/regions",
     requireLogin,
     (req, res) => {
+
+        const sales =
+            getSalesData();
+
 
         const regions = {};
 
@@ -371,11 +446,14 @@ router.get(
                     customers:
                         region.customers.size,
 
-                    revenue: region.revenue,
+                    revenue:
+                        region.revenue,
 
-                    profit: region.profit,
+                    profit:
+                        region.profit,
 
-                    units: region.units
+                    units:
+                        region.units
 
                 }))
 
@@ -398,5 +476,6 @@ router.get(
 
     }
 );
+
 
 module.exports = router;
