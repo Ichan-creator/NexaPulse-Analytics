@@ -54,24 +54,20 @@
                 <span>Dashboard</span>
             </a>
 
-
             <a href="/sales" class="active">
                 <span>◫</span>
                 <span>Sales</span>
             </a>
-
 
             <a href="/customers">
                 <span>◉</span>
                 <span>Customers</span>
             </a>
 
-
             <a href="/products">
                 <span>▤</span>
                 <span>Products</span>
             </a>
-
 
             <a href="/regions">
                 <span>◌</span>
@@ -88,10 +84,8 @@
             ) { %>
 
                 <a href="/sales/new">
-
                     <span>＋</span>
                     <span>Data Ingestion</span>
-
                 </a>
 
             <% } %>
@@ -103,10 +97,8 @@
             ) { %>
 
                 <a href="/users">
-
                     <span>♙</span>
                     <span>Users</span>
-
                 </a>
 
             <% } %>
@@ -171,10 +163,7 @@
 
                 <div class="profile">
 
-                    <% if (
-                        user &&
-                        user.fullName
-                    ) { %>
+                    <% if (user && user.fullName) { %>
 
                         <%= user.fullName
                             .split(" ")
@@ -197,14 +186,14 @@
         </header>
 
 
-        <!-- PAGE CONTENT -->
+        <!-- CONTENT -->
 
         <section class="edit-page">
 
             <div class="edit-container">
 
 
-                <!-- FORM HEADER -->
+                <!-- HEADER -->
 
                 <div class="edit-header">
 
@@ -227,7 +216,7 @@
                 </div>
 
 
-                <!-- RECORD INFORMATION -->
+                <!-- RECORD INFO -->
 
                 <div class="record-info">
 
@@ -281,6 +270,8 @@
                 >
 
 
+                    <!-- TRANSACTION DETAILS -->
+
                     <div class="form-section">
 
                         <div class="form-section-title">
@@ -305,8 +296,6 @@
                         <div class="form-grid">
 
 
-                            <!-- MONTH -->
-
                             <div class="form-group">
 
                                 <label for="month">
@@ -318,14 +307,11 @@
                                     id="month"
                                     name="month"
                                     value="<%= sale.month %>"
-                                    placeholder="e.g. January"
                                     required
                                 >
 
                             </div>
 
-
-                            <!-- CUSTOMER -->
 
                             <div class="form-group">
 
@@ -338,14 +324,11 @@
                                     id="customer"
                                     name="customer"
                                     value="<%= sale.customer %>"
-                                    placeholder="Customer name"
                                     required
                                 >
 
                             </div>
 
-
-                            <!-- REGION -->
 
                             <div class="form-group">
 
@@ -358,14 +341,11 @@
                                     id="region"
                                     name="region"
                                     value="<%= sale.region %>"
-                                    placeholder="e.g. Metro Manila"
                                     required
                                 >
 
                             </div>
 
-
-                            <!-- CATEGORY -->
 
                             <div class="form-group">
 
@@ -409,7 +389,7 @@
                     </div>
 
 
-                    <!-- PRODUCT SECTION -->
+                    <!-- PRODUCT INFORMATION -->
 
                     <div class="form-section">
 
@@ -424,7 +404,7 @@
                                 </h3>
 
                                 <p>
-                                    Update the product and sales quantity.
+                                    Update the product and quantity.
                                 </p>
 
                             </div>
@@ -434,8 +414,6 @@
 
                         <div class="form-grid">
 
-
-                            <!-- PRODUCT -->
 
                             <div class="form-group full-width">
 
@@ -448,7 +426,6 @@
                                     id="product"
                                     name="product"
                                     value="<%= sale.product %>"
-                                    placeholder="Product name"
                                     required
                                 >
 
@@ -467,8 +444,9 @@
                                     type="number"
                                     id="quantity"
                                     name="quantity"
-                                    value="<%= sale.quantity %>"
+                                    value="<%= Number(sale.quantity) %>"
                                     min="1"
+                                    step="1"
                                     required
                                 >
 
@@ -479,7 +457,7 @@
                     </div>
 
 
-                    <!-- FINANCIAL SECTION -->
+                    <!-- FINANCIAL INFORMATION -->
 
                     <div class="form-section">
 
@@ -521,7 +499,7 @@
                                         type="number"
                                         id="revenue"
                                         name="revenue"
-                                        value="<%= sale.revenue %>"
+                                        value="<%= Number(sale.revenue) %>"
                                         min="0"
                                         step="0.01"
                                         required
@@ -548,7 +526,7 @@
                                         type="number"
                                         id="profit"
                                         name="profit"
-                                        value="<%= sale.profit %>"
+                                        value="<%= Number(sale.profit) %>"
                                         min="0"
                                         step="0.01"
                                         required
