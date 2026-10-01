@@ -13,7 +13,7 @@ const salesPath = path.join(
     "../data/sales.json"
 );
 
-// ADD / DATA INGESTION
+// ADD SALE
 // ADMIN + ANALYST
 router.get(
     "/new",
@@ -34,10 +34,7 @@ router.post(
     (req, res) => {
 
         const sales = JSON.parse(
-            fs.readFileSync(
-                salesPath,
-                "utf8"
-            )
+            fs.readFileSync(salesPath, "utf8")
         );
 
         const {
@@ -51,56 +48,37 @@ router.post(
             profit
         } = req.body;
 
-
         const newSale = {
-
-            id:
-                sales.length > 0
-                    ? Math.max(
-                        ...sales.map(
-                            sale => Number(sale.id)
-                        )
-                    ) + 1
-                    : 1,
+            id: sales.length > 0
+                ? Math.max(
+                    ...sales.map(
+                        sale => Number(sale.id)
+                    )
+                ) + 1
+                : 1,
 
             month,
-
             customer,
-
             region,
-
             category,
-
             product,
-
             quantity: Number(quantity),
-
             revenue: Number(revenue),
-
             profit: Number(profit)
-
         };
-
 
         sales.push(newSale);
 
-
         fs.writeFileSync(
             salesPath,
-            JSON.stringify(
-                sales,
-                null,
-                4
-            )
+            JSON.stringify(sales, null, 4)
         );
 
-
         res.redirect("/sales");
-
     }
 );
 
-// EDIT DATA
+// EDIT SALE
 // ADMIN + ANALYST
 router.get(
     "/edit/:id",
@@ -108,12 +86,8 @@ router.get(
     (req, res) => {
 
         const sales = JSON.parse(
-            fs.readFileSync(
-                salesPath,
-                "utf8"
-            )
+            fs.readFileSync(salesPath, "utf8")
         );
-
 
         const sale = sales.find(
             item =>
@@ -121,24 +95,16 @@ router.get(
                 String(req.params.id)
         );
 
-
         if (!sale) {
-
             return res.status(404).send(
                 "Sales record not found."
             );
-
         }
 
-
-        res.render(
-            "edit-sale",
-            {
-                sale,
-                user: req.session.user
-            }
-        );
-
+        res.render("edit-sale", {
+            sale,
+            user: req.session.user
+        });
     }
 );
 
@@ -148,75 +114,82 @@ router.post(
     requireRole("admin", "analyst"),
     (req, res) => {
 
-        const sales = JSON.parse(
-            fs.readFileSync(
-                salesPath,
-                "utf8"
-            )
-        );
+        try {
 
-
-        const sale = sales.find(
-            item =>
-                String(item.id) ===
-                String(req.params.id)
-        );
-
-
-        if (!sale) {
-
-            return res.status(404).send(
-                "Sales record not found."
+            const sales = JSON.parse(
+                fs.readFileSync(salesPath, "utf8")
             );
 
+            const saleIndex = sales.findIndex(
+                item =>
+                    String(item.id) ===
+                    String(req.params.id)
+            );
+
+            if (saleIndex === -1) {
+                return res.status(404).send(
+                    "Sales record not found."
+                );
+            }
+
+            const {
+                month,
+                customer,
+                region,
+                category,
+                product,
+                quantity,
+                revenue,
+                profit
+            } = req.body;
+
+            // Update the existing record
+            sales[saleIndex] = {
+                ...sales[saleIndex],
+
+                month: month,
+                customer: customer,
+                region: region,
+                category: category,
+                product: product,
+
+                quantity: Number(quantity),
+                revenue: Number(revenue),
+                profit: Number(profit)
+            };
+
+            // Save changes to JSON file
+            fs.writeFileSync(
+                salesPath,
+                JSON.stringify(
+                    sales,
+                    null,
+                    4
+                ),
+                "utf8"
+            );
+
+            console.log(
+                `Sales record ${req.params.id} updated successfully.`
+            );
+
+            res.redirect("/sales");
+
+        } catch (error) {
+
+            console.error(
+                "EDIT SALE ERROR:",
+                error
+            );
+
+            res.status(500).send(
+                "Unable to update sales record."
+            );
         }
-
-
-        const {
-            month,
-            customer,
-            region,
-            category,
-            product,
-            quantity,
-            revenue,
-            profit
-        } = req.body;
-
-
-        sale.month = month;
-
-        sale.customer = customer;
-
-        sale.region = region;
-
-        sale.category = category;
-
-        sale.product = product;
-
-        sale.quantity = Number(quantity);
-
-        sale.revenue = Number(revenue);
-
-        sale.profit = Number(profit);
-
-
-        fs.writeFileSync(
-            salesPath,
-            JSON.stringify(
-                sales,
-                null,
-                4
-            )
-        );
-
-
-        res.redirect("/sales");
-
     }
 );
 
-// DELETE DATA
+// DELETE SALE
 // ADMIN ONLY
 router.post(
     "/delete/:id",
@@ -224,19 +197,14 @@ router.post(
     (req, res) => {
 
         const sales = JSON.parse(
-            fs.readFileSync(
-                salesPath,
-                "utf8"
-            )
+            fs.readFileSync(salesPath, "utf8")
         );
-
 
         const filteredSales = sales.filter(
             item =>
                 String(item.id) !==
                 String(req.params.id)
         );
-
 
         fs.writeFileSync(
             salesPath,
@@ -247,13 +215,11 @@ router.post(
             )
         );
 
-
         res.redirect("/sales");
-
     }
 );
 
-// RENAME DATA
+// RENAME PRODUCT
 // ADMIN ONLY
 router.post(
     "/rename/:id",
@@ -261,12 +227,8 @@ router.post(
     (req, res) => {
 
         const sales = JSON.parse(
-            fs.readFileSync(
-                salesPath,
-                "utf8"
-            )
+            fs.readFileSync(salesPath, "utf8")
         );
-
 
         const sale = sales.find(
             item =>
@@ -274,31 +236,22 @@ router.post(
                 String(req.params.id)
         );
 
-
         if (!sale) {
-
             return res.status(404).send(
                 "Sales record not found."
             );
-
         }
-
 
         const {
             product
         } = req.body;
 
-
         if (
             product &&
             product.trim() !== ""
         ) {
-
-            sale.product =
-                product.trim();
-
+            sale.product = product.trim();
         }
-
 
         fs.writeFileSync(
             salesPath,
@@ -309,9 +262,7 @@ router.post(
             )
         );
 
-
         res.redirect("/sales");
-
     }
 );
 
