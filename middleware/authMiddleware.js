@@ -17,9 +17,9 @@ function requireRole(...allowedRoles) {
         }
 
         if (!allowedRoles.includes(req.session.user.role)) {
-            return res.status(403).send(
-                "Access denied. You do not have permission to access this page."
-            );
+            return res.status(403).render("403", {
+                user: req.session.user
+            });
         }
 
         next();

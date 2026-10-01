@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Edit Sales Data - NexaPulse Analytics</title>
+
+    <link
+        rel="stylesheet"
+        href="/css/pages.css"
+    >
+
+</head>
+
+<body>
+
+<div class="page-container">
+
+    <div class="page-header">
+
+        <div>
+
+            <h1>Edit Sales Data</h1>
+
+            <p>
+                Update an existing sales record.
+            </p>
+
+        </div>
+
+        <a
+            href="/sales"
+            class="back-button"
+        >
+            Back to Sales
+        </a>
+
+    </div>
+
+
+    <form
+        action="/sales/edit/<%= sale.id %>"
+        method="POST"
+        class="data-form"
+    >
+
+        <div class="form-group">
+
+            <label>Month</label>
+
+            <input
+                type="text"
+                name="month"
+                value="<%= sale.month %>"
+                required
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Customer</label>
+
+            <input
+                type="text"
+                name="customer"
+                value="<%= sale.customer %>"
+                required
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Region</label>
+
+            <input
+                type="text"
+                name="region"
+                value="<%= sale.region %>"
+                required
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Category</label>
+
+            <input
+                type="text"
+                name="category"
+                value="<%= sale.category %>"
+                required
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Product</label>
+
+            <input
+                type="text"
+                name="product"
+                value="<%= sale.product %>"
+                required
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Quantity</label>
+
+            <input
+                type="number"
+                name="quantity"
+                value="<%= sale.quantity %>"
+                required
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Revenue</label>
+
+            <input
+                type="number"
+                name="revenue"
+                value="<%= sale.revenue %>"
+                required
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Profit</label>
+
+            <input
+                type="number"
+                name="profit"
+                value="<%= sale.profit %>"
+                required
+            >
+
+        </div>
+
+
+        <button
+            type="submit"
+            class="primary-button"
+        >
+            Save Changes
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+
+</html>
